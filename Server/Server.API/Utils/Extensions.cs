@@ -8,7 +8,7 @@ namespace Server.API.Utils
 {
     public static class Extensions
     {
-        public static string ConvertUrl(this string str)
+        public static string ConvertToUrl(this string str)
         {
             var tst = str.Replace(' ', '+');
             StringBuilder result = new StringBuilder();
@@ -24,5 +24,6 @@ namespace Server.API.Utils
 
             return result.ToString();
         }
+
     }
 }

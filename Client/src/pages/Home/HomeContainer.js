@@ -107,10 +107,11 @@ export function HomeContainer() {
     try {
       let response = await GetForecastByAddress(getValues("Address"));
       setResult(response);
-      setShowError(false);
+      if(!response){
+        setShowError(true);
+      }
       setIsSending(false)
     } catch (ex) {
-
       setShowError(true)
       setIsSending(false)
     }

@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React from "react";
 import CardComponent from "../Card/cardComponent";
 import styled from "styled-components";
 import { useGlobalContext } from '../../state/GlobalState';
@@ -18,17 +18,14 @@ export const CardsList = styled.div`
 
 
 export const CardsComponent = () => {
-  const [state, setResult] = useGlobalContext();
-
-  debugger;
+  const [state] = useGlobalContext();
   return (
     <CardsList>
       {
-        state&& state.listForecast &&state.listForecast.map((p) =>
+        state && state.listForecastByDay && state.listForecastByDay.map((p) =>
         (
-          <CardComponent Temperature={p.temperature} TemperatureUnit={p.temperatureUnit} DayName={p.dayName} IconUrl={p.iconUrl} Details={p.details} />
-        )
-        )
+          <CardComponent forecastByDay={p.forecast}/>
+        ))
       }
 
     </CardsList>

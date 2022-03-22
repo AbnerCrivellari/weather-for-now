@@ -60,29 +60,31 @@ namespace Server.API.Services
 
         private ForecastVIewModel ConvertModelToVIewModel(ForecastResponseDTO dto, string city)
         {
-            var viewModel = new ForecastVIewModel("", city, new List<Forecast>());
-            List<Forecast> list = new List<Forecast>();
+
+            var listForecast = new List<Forecast>();
+            var listOfDays = new List<ForecastByDay>();
+
             for (int i = 0; i < dto.properties.periods.Length; i++)
             {
+
                 var period = dto.properties.periods[i];
 
-                list.Add(new Forecast()
+                listForecast.Add(new Forecast(id: i,
+                    dayName: period.name,
+                    type: period.shortForecast,
+                    details: period.detailedForecast,
+                    iconUrl: period.icon,
+                    temperature: period.temperature,
+                    temperatureUnit: period.temperatureUnit));
+
+                if (i % 2 != 0)
                 {
-                    id = i,
-                    DayName = period.name,
-                    Type = period.name.Contains("Night")? "night": "day",
-                    Details = period.detailedForecast,
-                    IconUrl = period.icon,
-                    Temperature = period.temperature,
-                    TemperatureUnit = period.temperatureUnit
-                });
+                    listOfDays.Add(new ForecastByDay(listForecast));
+                    listForecast = new List<Forecast>();
+                }
             }
 
-            viewModel.ListForecast = list;
-
-            return viewModel;
-
+            return new ForecastVIewModel("", city, listOfDays);
         }
-
     }
 }

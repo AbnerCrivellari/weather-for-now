@@ -8,20 +8,29 @@ namespace Server.API.ViewModel
 {
     public class ForecastVIewModel
     {
-        public ForecastVIewModel(string address, string city, IEnumerable<Forecast> listForecast)
+        public ForecastVIewModel(string address, string city, IEnumerable<ForecastByDay> listForecastByDay)
         {
             this.address = address;
             City = city;
-            ListForecast = listForecast;
+            ListForecastByDay = listForecastByDay;
         }
         public string address { get; set; }
         public string City { get; set; }
-        public IEnumerable<Forecast> ListForecast { get; set; }
+        public IEnumerable<ForecastByDay> ListForecastByDay { get; set; }
 
         //public static implicit operator ForecastVIewModel(ForecastResponseDTO dto)
         //{
         //    return new ForecastVIewModel("","", )
         //}
+    }
+
+    public class ForecastByDay
+    {
+        public ForecastByDay(IEnumerable<Forecast> forecast)
+        {
+            Forecast = forecast;
+        }
+        public IEnumerable<Forecast> Forecast { get; set; }
     }
 
     public class Forecast
@@ -33,5 +42,16 @@ namespace Server.API.ViewModel
         public string DayName { get; set; }
         public string IconUrl { get; set; }
         public string Details { get; set; }
+
+        public Forecast(int id, string type, float temperature, string temperatureUnit, string dayName, string iconUrl, string details)
+        {
+            this.id = id;
+            Type = type;
+            Temperature = temperature;
+            TemperatureUnit = temperatureUnit;
+            DayName = dayName;
+            IconUrl = iconUrl;
+            Details = details;
+        }
     }
 }
