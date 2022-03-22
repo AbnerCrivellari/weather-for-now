@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Server.API.Configuration;
 
 namespace Server.API
 {
@@ -30,11 +31,10 @@ namespace Server.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Server.API", Version = "v1" });
-            });
+
+            services.AddSwaggerConfiguration();
 
             services.AddRefitClient<IGeocodingServices>().ConfigureHttpClient(c =>
             {
@@ -74,6 +74,9 @@ namespace Server.API
             {
                 endpoints.MapControllers();
             });
+
+
+            app.UseSwaggerSetup();
         }
     }
 }
