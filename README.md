@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Getting Started 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Server
+
+It was implemented using .NET 5 and Refit
 
 ## Available Scripts
 
