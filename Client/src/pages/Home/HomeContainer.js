@@ -22,7 +22,7 @@ const Title = styled.h1`
 `;
 
 const LogoWrapper = styled.div`
-  margin-top: 20vh;
+  margin-top: 10vh;
   width: 100vw; // 100% view width
   justify-content:center; // centers in the flex direction and the default flex-direction is row
   align-items:center; // centers perpendicular to the flex direction

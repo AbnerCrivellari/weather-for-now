@@ -25,4 +25,15 @@ export default  createGlobalStyle`
         color: ${props => props.theme.text};
         height: 30px;
     }
+    .cardColor {
+        background-color: ${props => props.theme.backgroundCards};
+    }
+    .toggleDarkMode {
+        margin-top: 10px;
+        width: 100%;
+        align-items: center;
+    }
+    .labelToggle {
+        vertical-align: top;
+    }
 `

@@ -63,6 +63,7 @@ namespace Server.API.Services
 
             var listForecast = new List<Forecast>();
             var listOfDays = new List<ForecastByDay>();
+            int count = 0;
 
             for (int i = 0; i < dto.properties.periods.Length; i++)
             {
@@ -77,10 +78,13 @@ namespace Server.API.Services
                     temperature: period.temperature,
                     temperatureUnit: period.temperatureUnit));
 
-                if (i % 2 != 0)
+                if(!period.name.Contains("Tonight")) count++;
+
+                if (count == 2 || period.name.Contains("Tonight"))
                 {
                     listOfDays.Add(new ForecastByDay(listForecast));
                     listForecast = new List<Forecast>();
+                    count = 0;
                 }
             }
 

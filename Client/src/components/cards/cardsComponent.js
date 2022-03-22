@@ -2,6 +2,7 @@ import React from "react";
 import CardComponent from "../Card/cardComponent";
 import styled from "styled-components";
 import { useGlobalContext } from '../../state/GlobalState';
+import Carousel from 'react-elastic-carousel';
 
 export const CardsList = styled.div`
   z-index: 0;
@@ -16,18 +17,23 @@ export const CardsList = styled.div`
   }
 `;
 
+const breakPoints = [
+  { width: 100, itemsToShow: 7 }
+];
 
 export const CardsComponent = () => {
   const [state] = useGlobalContext();
   return (
-    <CardsList>
-      {
-        state && state.listForecastByDay && state.listForecastByDay.map((p) =>
-        (
-          <CardComponent forecastByDay={p.forecast}/>
-        ))
-      }
+    <Carousel breakPoints={breakPoints}>
+      <CardsList>
+        {
+          state && state.listForecastByDay && state.listForecastByDay.map((p, key) =>
+          (
+            <CardComponent forecastByDay={p.forecast} key={key} />
+          ))
+        }
+      </CardsList>
+    </Carousel>
 
-    </CardsList>
   )
 }

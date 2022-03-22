@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {getIconByType} from '../../utils/utils'
+import { getIconByType } from '../../utils/utils'
 
 
 const Card = styled.div`
   width: 100%;
   margin-top: 10px;
-  background-color: #586574;
   border-radius: 10px;
   height: 38vh;
   min-height: 300px;
@@ -44,22 +43,23 @@ const CardComponent = ({ forecastByDay }) => {
   debugger;
   return (
     <Wrapper>
-      <span>
-        <h2>{forecastByDay[0].dayName}</h2>
-      </span>
-      <Card key={forecastByDay[0].dayName}>
+      <h2>{forecastByDay[0].dayName}</h2>
+      <Card className="cardColor" key={forecastByDay[0].dayName}>
         <Div>
           <h2>{forecastByDay[0].temperature}° <span>{forecastByDay[0].temperatureUnit}</span></h2>
-          <Icon src={getIconByType(forecastByDay[0].type, true)}></Icon>
+          <Icon src={getIconByType(forecastByDay[0].type, !forecastByDay[0].dayName.includes("Night"))}></Icon>
           <p>{forecastByDay[0].type}</p>
           {/* <p>{Details}</p> */}
         </Div>
-        <Div>
-          <h2>{forecastByDay[1].temperature}° <span>{forecastByDay[1].temperatureUnit}</span></h2>
-          <Icon src={getIconByType(forecastByDay[1].type, false)}></Icon>
-          <p>{forecastByDay[1].type}</p>
-          {/* <p>{Details}</p> */}
-        </Div>
+        { forecastByDay[1] &&
+          <Div>
+            <h4>{forecastByDay[1].dayName}</h4>
+            <h2>{forecastByDay[1].temperature}° <span>{forecastByDay[1].temperatureUnit}</span></h2>
+            <Icon src={getIconByType(forecastByDay[1].type, !forecastByDay[1].dayName.includes("Night"))}></Icon>
+            <p>{forecastByDay[1].type}</p>
+            {/* <p>{Details}</p> */}
+          </Div>
+        }
       </Card>
     </Wrapper>
   )
