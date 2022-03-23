@@ -54,41 +54,42 @@ namespace Server.API.Services
             var headers = new ForecastGridsRequestDTO();
             var gridsResult = await _forecastService.GetGrids(coordinates.y, coordinates.x, headers.Headers);
             var foreCastResult = await _forecastService.GetByGrids(gridsResult.properties.gridY, gridsResult.properties.gridX, headers.Headers);
-
-            return ConvertModelToVIewModel(foreCastResult, city);
+            ForecastVIewModel result = foreCastResult;
+            result.City = city;
+            return result;
         }
 
-        private ForecastVIewModel ConvertModelToVIewModel(ForecastResponseDTO dto, string city)
-        {
+        //private ForecastVIewModel ConvertModelToVIewModel(ForecastResponseDTO dto, string city)
+        //{
 
-            var listForecast = new List<Forecast>();
-            var listOfDays = new List<ForecastByDay>();
-            int count = 0;
+        //    var listForecast = new List<Forecast>();
+        //    var listOfDays = new List<ForecastByDay>();
+        //    int count = 0;
 
-            for (int i = 0; i < dto.properties.periods.Length; i++)
-            {
+        //    for (int i = 0; i < dto.properties.periods.Length; i++)
+        //    {
 
-                var period = dto.properties.periods[i];
+        //        var period = dto.properties.periods[i];
 
-                listForecast.Add(new Forecast(id: i,
-                    dayName: period.name,
-                    type: period.shortForecast,
-                    details: period.detailedForecast,
-                    iconUrl: period.icon,
-                    temperature: period.temperature,
-                    temperatureUnit: period.temperatureUnit));
+        //        listForecast.Add(new Forecast(id: i,
+        //            dayName: period.name,
+        //            type: period.shortForecast,
+        //            details: period.detailedForecast,
+        //            iconUrl: period.icon,
+        //            temperature: period.temperature,
+        //            temperatureUnit: period.temperatureUnit));
 
-                if(!period.name.Contains("Tonight")) count++;
+        //        if(!period.name.Contains("Tonight")) count++;
 
-                if (count == 2 || period.name.Contains("Tonight"))
-                {
-                    listOfDays.Add(new ForecastByDay(listForecast));
-                    listForecast = new List<Forecast>();
-                    count = 0;
-                }
-            }
+        //        if (count == 2 || period.name.Contains("Tonight"))
+        //        {
+        //            listOfDays.Add(new ForecastByDay(listForecast));
+        //            listForecast = new List<Forecast>();
+        //            count = 0;
+        //        }
+        //    }
 
-            return new ForecastVIewModel("", city, listOfDays);
-        }
+        //    return new ForecastVIewModel("", city, listOfDays);
+        //}
     }
 }

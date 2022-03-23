@@ -7,3 +7,7 @@ export const DayRain = require('./ForecastIcons/day_rain.png');
 export const NightRain = require('./ForecastIcons/night_full_moon_rain.png');
 export const Rain = require('./ForecastIcons/rain.png');
 export const RainThunder = require('./ForecastIcons/rain_thunder.png');
+
+
+export const Day = require('./Backgrounds/day.jpg');
+export const Night = require('./Backgrounds/night.jpg');

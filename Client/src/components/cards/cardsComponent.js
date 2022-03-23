@@ -11,10 +11,10 @@ export const CardsList = styled.div`
   justify-content: space-around;
   margin: 0 auto;
   flex-wrap: wrap;
-  overflow-y: scroll;
+  /* overflow-y: scroll;
   ::-webkit-scrollbar {
       display: none;
-  }
+  } */
 `;
 
 const breakPoints = [
@@ -24,7 +24,7 @@ const breakPoints = [
 export const CardsComponent = () => {
   const [state] = useGlobalContext();
   return (
-    <Carousel breakPoints={breakPoints}>
+    // <Carousel breakPoints={breakPoints}>
       <CardsList>
         {
           state && state.listForecastByDay && state.listForecastByDay.map((p, key) =>
@@ -33,7 +33,7 @@ export const CardsComponent = () => {
           ))
         }
       </CardsList>
-    </Carousel>
+    // </Carousel>
 
   )
 }

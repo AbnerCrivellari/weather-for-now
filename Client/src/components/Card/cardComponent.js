@@ -22,7 +22,7 @@ const Card = styled.div`
 `;
 
 const Div = styled.div`
-  height: 45%;
+  height: 47%;
 `;
 
 const Wrapper = styled.div`
@@ -39,6 +39,12 @@ const Icon = styled.img`
   width: 30%;
 `;
 
+const Line = styled.div`
+  width: auto;
+  height: 1px;
+ border: 1px solid red;
+`;
+
 const CardComponent = ({ forecastByDay }) => {
   debugger;
   return (
@@ -47,18 +53,20 @@ const CardComponent = ({ forecastByDay }) => {
       <Card className="cardColor" key={forecastByDay[0].dayName}>
         <Div>
           <h2>{forecastByDay[0].temperature}° <span>{forecastByDay[0].temperatureUnit}</span></h2>
-          <Icon src={getIconByType(forecastByDay[0].type, !forecastByDay[0].dayName.includes("Night"))}></Icon>
+          <Icon src={getIconByType(forecastByDay[0].type, forecastByDay[0].isDay)}></Icon>
           <p>{forecastByDay[0].type}</p>
           {/* <p>{Details}</p> */}
         </Div>
-        { forecastByDay[1] &&
-          <Div>
-            <h4>{forecastByDay[1].dayName}</h4>
-            <h2>{forecastByDay[1].temperature}° <span>{forecastByDay[1].temperatureUnit}</span></h2>
-            <Icon src={getIconByType(forecastByDay[1].type, !forecastByDay[1].dayName.includes("Night"))}></Icon>
-            <p>{forecastByDay[1].type}</p>
-            {/* <p>{Details}</p> */}
-          </Div>
+        {forecastByDay[1] &&
+          <>
+            <Line />
+            <Div>
+              <h2>{forecastByDay[1].temperature}° <span>{forecastByDay[1].temperatureUnit}</span></h2>
+              <Icon src={getIconByType(forecastByDay[1].type, forecastByDay[1].isDay)}></Icon>
+              <p>{forecastByDay[1].type}</p>
+              {/* <p>{Details}</p> */}
+            </Div>
+          </>
         }
       </Card>
     </Wrapper>

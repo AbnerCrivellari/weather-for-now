@@ -1,4 +1,4 @@
-import { ClearDay, ClearNight, DayPartialCloud, NightPartialCloud, Cloudy, DayRain, NightRain, Rain, RainThunder } from '../assets/index'
+import { ClearDay, ClearNight, DayPartialCloud, NightPartialCloud, Cloudy, DayRain, NightRain, Rain, RainThunder, Day, Night } from '../assets/index'
 
 
 
@@ -25,4 +25,9 @@ export function getIconByType(type, isDay) {
         return ClearDay;
       return ClearNight;
   }
+}
+export function getBackground(isDay){
+  if(isDay)
+    return Day;
+  return Night;
 }
