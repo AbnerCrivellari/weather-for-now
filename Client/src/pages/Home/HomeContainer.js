@@ -103,6 +103,7 @@ export function HomeContainer() {
 
   const sendRequest = useCallback(async () => {
     if (isSending) return
+    setResult({})
     setIsSending(true)
     try {
       let response = await GetForecastByAddress(getValues("Address"));
@@ -130,7 +131,7 @@ export function HomeContainer() {
         </InputWrapper>
         <Button onClick={handleSubmit(sendRequest)}>Search</Button>
       </Form>
-      {state ?
+      {state && !isSending ?
         <CardsComponent /> :
         showError && <h2>Address was not found!!</h2>
       }
